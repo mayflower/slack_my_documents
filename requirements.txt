@@ -1,0 +1,16 @@
+langchain
+layoutparser[layoutmodels,tesseract]
+llama_index
+unstructured[local-inference]
+slack_bolt
+openai
+fastapi
+filelock
+websockets
+gptcache
+uvicorn
+jinja2
+faiss-cpu
+bs4
+libmagic
+python-dotenv
