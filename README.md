@@ -47,10 +47,11 @@ OPENAI_API_MODEL=gpt-3.5-turbo # Options: gpt-4, gpt-4-32k, gpt-3.5-turbo, text-
 SLACK_BOT_TOKEN= # Slack Bot token from , "xoxb-..."
 SLACK_BOT_KEYWORD= # Slack Bot keyword - when should be answer?
 SLACK_APP_TOKEN= # Slack App token from , "xapp-..."```
+```
 
 ### Daten importieren 
 
-Der Bot unterstützt im Moment folgende Formate: 
+Der Bot unterstützt im Moment folgende Formate über unstructured.io:
 
 * Word-Dokumente (.docx, .doc)
 * Powerpoint (.pptx, .ppt)
