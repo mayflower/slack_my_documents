@@ -1,4 +1,4 @@
-"""Import von unstrukturierten Daten auf Basis von unstructured.io"""
+"""Import von unstrukturierten Daten mittels unstructured.io"""
 import pickle
 from llama_index import download_loader
 from langchain.embeddings import OpenAIEmbeddings
@@ -9,12 +9,7 @@ from langchain.vectorstores.faiss import FAISS
 def import_docs():
     """Lese alle Dokumente im Verzeichnis data und wandle zu Vektoren"""
     directory_reader = download_loader("SimpleDirectoryReader")
-    loader = directory_reader('./data', file_extractor={
-        ".pdf": "UnstructuredReader",
-        ".html": "UnstructuredReader",
-        ".eml": "UnstructuredReader",
-        ".pptx": "PptxReader"
-        })
+    loader = directory_reader('./data', recursive=True)
     raw_documents = loader.load_data()
     langchain_documents = [d.to_langchain_format() for d in raw_documents]
     text_splitter = RecursiveCharacterTextSplitter(
