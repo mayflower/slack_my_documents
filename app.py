@@ -85,11 +85,11 @@ app = App(
 def message_hello(message, say):
     """Frage an openai, Ergebnis an user"""
     question = message['text'].replace(SLACK_BOT_KEYWORD,'')
-    answer = qa_chain({"question":question, "chat_history": history[-4]})['answer']
+    answer = qa_chain({"question":question, "chat_history": history})['answer']
     say(
         text=f"<@{message['user']}>: {answer}"
     )
-    history.append(("Frage: " + question, "Antwort: " + answer))
+    history.append((question, answer))
 
 if __name__ == "__main__":
     SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"]).start()
