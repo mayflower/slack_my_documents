@@ -1,10 +1,16 @@
 """Import von unstrukturierten Daten mittels unstructured.io"""
 import pickle
+import os
 from llama_index import download_loader
 from langchain.embeddings import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
+from dotenv import load_dotenv
 
+load_dotenv()
+
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", default="")
+assert OPENAI_API_KEY, "OPENAI_API_KEY environment variable is missing from .env"
 
 def import_docs():
     """Lese alle Dokumente im Verzeichnis data und wandle zu Vektoren"""
@@ -17,7 +23,7 @@ def import_docs():
         chunk_overlap=200,
     )
     documents = text_splitter.split_documents(langchain_documents)
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
     vectorstore = FAISS.from_documents(documents, embeddings)
 
     # Save vectorstore
