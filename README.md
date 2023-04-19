@@ -7,7 +7,22 @@ Ein simpler Slackbot, der es erlaubt, mit den Daten der eigenen Dokumente zu spr
 ### Slack-Konfiguration
 
 Zunächst braucht unser kleiner Bot einen Zugriff auf Slack. Dazu nutzen wir das Bolt-Framework in Python, das von Slack selbst zur Verfügung gestellt wird, 
-Bitte folgen Sie der Anleitung unter https://slack.dev/bolt-python/tutorial/getting-started, um einen SLACK_BOT_TOKEN und einen SLACK_APP_TOKEN zu erhalten. Der SLACK_BOT_TOKEN sollte mit xoxb-... beginnen, der SLACK_APP_TOKEN mit xapp-... .
+Bitte folgen Sie der Anleitung unter https://slack.dev/bolt-python/tutorial/getting-started, um einen SLACK_BOT_TOKEN und einen SLACK_APP_TOKEN zu erhalten. Der SLACK_BOT_TOKEN sollte mit xoxb-... beginnen (Im Reiter OAuth zu finden), der SLACK_APP_TOKEN mit xapp-... . (App-Level Token, nicht Secret oder Verification Token, zu finden über Settings/Basic Information)
+
+Die Slack-App benötigt folgende Einstellungen:
+- Socket Mode enabled
+- Event Subscriptions enabled
+  - Subscribe to Bot Events:
+   - Je nach Art der Interaktion
+    - `message:channels`
+    - `message:groups`
+    - `message:im`
+    - `message:mpim`
+- OAuth & Permissions 
+ - Token (wird bei Integration in Workspace automatisch erstellt)
+ - Bot Token Scopes
+  - `chat:write`
+
 
 ### OpenAI-Key
 
@@ -23,6 +38,7 @@ cd slack_my_documents
 
 conda create -n slackbot python=3.10.9
 conda activate slackbot
+conda install pytorch -c pytorc
 
 pip install -r requirements.txt 
 ```
